@@ -22,7 +22,7 @@ module Taskr
   end
 
 end
-extend Taskr
+include Taskr
 
 desc "This is the first task"
 task :my_first_task do 
