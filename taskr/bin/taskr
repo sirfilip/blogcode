@@ -26,5 +26,5 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-task_name = ARGV.shift
+task_name = ARGV.first
 task_manager.run(task_name)
