@@ -5,7 +5,7 @@ describe Taskr::Task do
   it 'can be created with a name, callable action and description' do 
     begin 
       Taskr::Task.new('name', stub(:call => nil), 'description')
-    rescue ArgumentError  => e
+    rescue ArgumentError
       flunk("Should not raise ArgumentError")
     end
   end
