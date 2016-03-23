@@ -20,7 +20,10 @@ OptionParser.new do |opts|
     exit 0
   end
 
-  puts opts unless ARGV.any?
+  unless ARGV.any?
+    puts opts
+    exit 1
+  end
 end.parse!
 
 task_name = ARGV.shift
