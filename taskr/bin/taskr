@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require File.expand_path('../../lib/taskr', __FILE__)
+include Taskr::DSL
+instance_eval(File.read('Taskrfile'))
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: taskr task_name"
+
+  opts.on('-h', '--help', 'Displays Help') do 
+    puts opts
+    exit 0
+  end
+
+  opts.on('-t', '--tasks', 'Displays Available Tasks') do 
+    task_manager.tasks.each do |task|
+      puts "#{task.name}: #{task.description}" 
+    end
+    exit 0
+  end
+
+  puts opts unless ARGV.any?
+end.parse!
+
+task_name = ARGV.shift
+task_manager.run(task_name)
