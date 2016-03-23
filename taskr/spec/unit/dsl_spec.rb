@@ -15,7 +15,7 @@ describe Taskr::DSL do
     end.wont_be_nil
   end
   
-  it 'can register task with its dependencies' do 
+  it 'can register task with a single dependency' do 
     task :dep1 do 
       "Dep1"
     end
@@ -24,6 +24,23 @@ describe Taskr::DSL do
     end
     dep1 = task_manager.tasks.find {|task| task.name == :dep1}
     dep1.expects(:run)
+    task_manager.run(:the_task)
+  end
+  
+  it 'can register task with multilple dependencies' do 
+    task :dep1 do 
+      "Dep1"
+    end
+    task :dep2 do 
+      "Dep2"
+    end
+    task :the_task => [:dep1, :dep2] do 
+      "The task"
+    end
+    dep1 = task_manager.tasks.find {|task| task.name == :dep1}
+    dep2 = task_manager.tasks.find {|task| task.name == :dep2}
+    dep1.expects(:run)
+    dep2.expects(:run)
     task_manager.run(:the_task)
   end
   
