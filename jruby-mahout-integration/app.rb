@@ -1,7 +1,6 @@
 require 'jbundler'
 require 'java'
 
-#java_import "java.io.File"
 java_import "org.slf4j.LoggerFactory"
 java_import "org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender"
 java_import "org.apache.mahout.cf.taste.impl.model.file.FileDataModel"
