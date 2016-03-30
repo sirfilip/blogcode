@@ -26,7 +26,7 @@ module Taskr
     
     def find_by_name(task_name)
       task = @data.fetch(task_name, nil)
-      raise TaskNotFoundError.new("Task with name #{task_name} could not be found") if task.nil?
+      raise TaskNotFoundError.new("Task with name '#{task_name}' could not be found") if task.nil?
       task
     end
   

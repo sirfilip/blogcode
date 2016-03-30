@@ -17,15 +17,22 @@ describe Taskr::TaskManager do
     e.message.must_equal 'Can register only instances of Taskr::Task'
   end
   
-  it 'provides access to the tasks registered' do 
+  it 'provides access to the registered tasks' do 
     task_manager.register(task)
     task_manager.tasks.must_include task
   end
   
-  it 'can find and run a task by its name' do
+  it 'can run a task by its name' do
     task_manager.register(task)
     task.expects(:run)
     task_manager.run(task.name)
+  end
+  
+  it 'raises an error if we run a non-existing task' do
+    e = lambda do 
+      task_manager.run('a non existing task')
+    end.must_raise Taskr::TaskNotFoundError
+    e.message.must_equal "Task with name 'a non existing task' could not be found"
   end
   
   it 'can register task with dependencies' do
